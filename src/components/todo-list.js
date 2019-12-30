@@ -3,9 +3,9 @@ import TodoListItem from './todo-list-item'
 
 export default ( { items } ) => {
 
-  const elements = items.map( item => {
+  const elements = items.map( ({ id, ...item }) => {
     return (
-      <li  key={ item.label }>
+      <li  key={ id }>
         <TodoListItem { ...item }/>
       </li>
     )
