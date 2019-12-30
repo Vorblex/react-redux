@@ -1,41 +1,22 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-
-const TodoList = () => {
-
-  const items = ['Learn React', 'Build Apps']
-  return (
-    <ul>
-      <li>{ items[0] }</li>
-      <li>{ items[1] }</li>
-    </ul>
-  )
-}
-
-const AppHeader = () => {
-    return (
-      <h1>Toto list</h1>
-    )
-  }
-
-const SearchPanel = () => {
-
-    const searchText = 'Type here'
-    const searchStyle = {
-      fontSize: '20px'
-    }
-    return (
-      <input style={ searchStyle } placeholder={searchText} />
-    )
-  }
+import TodoList from './components/todo-list'
+import AppHeader from './components/app-header'
+import SearchPanel from './components/search-panel'
 
 const App = () => {
+
+  const todoData = [
+    { label: 'Drink Coffee', important: false},
+    { label: 'Learn React!', important: true},
+    { label: 'Best Apps', important: false}
+  ]
 
   return (
     <div>
       <AppHeader />
       <SearchPanel />
-      <TodoList />
+      <TodoList items={ todoData } />
     </div>
   )
 }
