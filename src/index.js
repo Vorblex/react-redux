@@ -19,21 +19,20 @@ const AppHeader = () => {
   }
 
 const SearchPanel = () => {
+
+    const searchText = 'Type here'
+    const searchStyle = {
+      fontSize: '20px'
+    }
     return (
-      <input placeholder="search" />
+      <input style={ searchStyle } placeholder={searchText} />
     )
   }
 
 const App = () => {
 
-  const isLoggedIn = true
-  const loginBox = <div>Log in</div>
-  const welcomeBox = <div>Welcome</div>
-
   return (
     <div>
-      <span>{ (new Date()).toString() }</span>
-      { isLoggedIn ? welcomeBox : loginBox }
       <AppHeader />
       <SearchPanel />
       <TodoList />
