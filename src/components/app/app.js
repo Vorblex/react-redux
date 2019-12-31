@@ -24,7 +24,9 @@ export default () => {
         <ItemStatusFilter />
       </div>
 
-      <TodoList items={ todoData } />
+      <TodoList 
+        items={ todoData }
+        onDelated={ id => console.log(id) } />
     </div>
   )
 }
