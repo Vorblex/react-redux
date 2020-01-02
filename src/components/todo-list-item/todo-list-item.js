@@ -15,20 +15,11 @@ export default class extends Component {
 
     if(done) {
       classNames += ' done'
-    } else {
-      let res = classNames.split(' ')
-      res = res.splice(res.indexOf('done'))
-      classNames = res.join()
     }
 
     if(important) {
       classNames += ' important'
     } 
-    // else {
-    //   let res = classNames.split(' ')
-    //   res = res.splice(res.indexOf('important'))
-    //   classNames = res.join()
-    // }
     
     return (
       <span className={ classNames }>
@@ -43,6 +34,7 @@ export default class extends Component {
                 onClick={ onToggleImportant }>
           <i className="fa fa-exclamation" />
         </button>
+        
         <button type="button"
                 className="btn btn-outline-danger btn-sm float-right"
                 onClick={ onDelated }>

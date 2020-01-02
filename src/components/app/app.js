@@ -13,6 +13,8 @@ export default class extends Component {
   maxId = 1
 
   state = {
+    filter: 'all',
+    term: '',
     todoData: [
       this.createTodoItem('Drink Coffee'),
       this.createTodoItem('Learn React!'),
@@ -61,6 +63,10 @@ export default class extends Component {
     })
   }
 
+  changeFilter = e => {
+    this.setState({ filter: e })
+  }
+
   toggleProperty(arr, id, key) {
     const newArr = [...arr],
           ndx =  this.findIndex( newArr, id),
@@ -75,19 +81,10 @@ export default class extends Component {
   onToggleDone = (id) => {
     this.setState(({todoData})=> {
       return { todoData: this.toggleProperty(todoData, id, 'done') }
-
       // const ndx = this.findIndex(todoData, id),
       //       oldItem = todoData[ndx],
       //       newItem = { ...oldItem, done: !oldItem.done},
       //       newArr = [...todoData.slice(0, ndx), newItem, ...todoData.slice(ndx + 1)]
-
-      // const newArr = [...todoData],
-      //       ndx =  this.findIndex( newArr, id),
-      //       newItem = {...newArr[ndx]}
-
-      // newItem.done = !newItem.done
-      // newArr[ndx] = newItem
-      // return { todoData: newArr }
     })
   }
 
@@ -97,22 +94,46 @@ export default class extends Component {
     })
   }
 
+  changeTerm = (term) => {
+    this.setState({ term })
+  }
+
+  filteredTodos(todoData, filter) {
+    if(filter === 'active') return todoData.filter( e => !e.done)
+    if(filter === 'done') return todoData.filter( e => e.done)
+    
+    return todoData
+  }
+
+  search(items, term) {
+    if(term.length === 0) return items
+
+    return items.filter( el =>  ~el.label.toLowerCase().indexOf(term.toLowerCase()) )
+  }
+
   render() {
-    const { todoData } = this.state,
+    const { todoData, term, filter } = this.state,
           doneCount = todoData.filter( el => el.done ).length,
-          todoCount = todoData.length - doneCount
+          todoCount = todoData.length - doneCount,
+          visibleItems = this.search(this.filteredTodos(todoData, filter), term)
 
     return (
       <div className="todo-app">
         <AppHeader toDo={ todoCount } done={ doneCount } />
   
         <div className="top-panel d-flex">
-          <SearchPanel />
-          <ItemStatusFilter />
+          <SearchPanel
+            term={ term }
+            onTermChange={ this.changeTerm } />
+            
+          <ItemStatusFilter
+            filter={ filter }
+            onFilterChange={ this.changeFilter }
+          />
         </div>
   
         <TodoList 
-          items={ todoData }
+          items={ visibleItems }
           onDelated={ this.delateItem }
           onToggleImportant={ this.onToggleImportant }
           onToggleDone={ this.onToggleDone }
