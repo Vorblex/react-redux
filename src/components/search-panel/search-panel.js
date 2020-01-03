@@ -2,7 +2,7 @@ import React from 'react'
 
 import './search-panel.css'
 
-export default ({ term, onTermChange}) => {
+export default ({ term, onTermChange }) => {
 
   return (
     <input type="text"

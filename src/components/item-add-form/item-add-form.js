@@ -27,9 +27,9 @@ export default class extends Component {
                onChange={this.onLabelChange}
                placeholder="What needs to be done"
                value={this.state.label} />
-        <button
-          type="submit"
-          className="btn btn-outline-secondary">
+               
+        <button type="submit"
+                className="btn btn-outline-secondary">
           Add item
         </button>
       </form>
